@@ -202,7 +202,10 @@ function SignUp() {
                   "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/register",
                   {
                     method: "POST",
-                    headers: { "Content-Type": "Application/json" },
+                    headers: {
+                      "Content-Type": "Application/json",
+                      "access-control-allow-origin": "*",
+                    },
                     credentials: "include",
                     body: JSON.stringify({ ...values }),
                   }

@@ -72,6 +72,7 @@ const NavigationMenu = () => {
         credentials: "include", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
+          "access-control-allow-origin": "*",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       })

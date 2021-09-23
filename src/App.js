@@ -1,8 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import {
-  Switch,
-  Route,
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import AddNewCampground from "./_pages/AddNewCampground";
 import IndividualCampground from "./_pages/IndividualCampground";
 import Landing from "./_pages/Landing";
@@ -29,6 +26,7 @@ function App() {
         credentials: "include", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
+          "access-control-allow-origin": "*",
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       })
