@@ -205,6 +205,7 @@ function SignIn() {
                     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
                     credentials: "include", // include, *same-origin, omit
                     headers: {
+                      Accept: "application/json",
                       "Content-Type": "application/json",
                       "access-control-allow-origin": "*",
                       // 'Content-Type': 'application/x-www-form-urlencoded',
