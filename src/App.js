@@ -38,7 +38,7 @@ function App() {
           console.log(error.message);
         });
     })();
-  }, [auth]);
+  }, []);
   return (
     <LoginContext.Provider value={{ auth, setAuth }} className={classes.root}>
       <Switch>
