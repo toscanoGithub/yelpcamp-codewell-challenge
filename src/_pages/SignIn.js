@@ -225,7 +225,7 @@ function SignIn() {
                     } else {
                       formik.resetForm();
                       setAuth(data.user);
-                      // history.push("/search");
+                      history.push("/search");
                     }
                   })
                   .catch((error) =>
