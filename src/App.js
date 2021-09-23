@@ -22,8 +22,8 @@ function App() {
       await fetch(`https://yelpcamp-codewell-challenge.herokuapp.com/user`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "*same-origin", // include, *same-origin, omit
+        cache: "force-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "include", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
           "access-control-allow-origin": "*",
