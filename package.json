@@ -1,4 +1,5 @@
 {
+  "proxy": "https://stoic-mahavira-96f692.netlify.app/",
   "name": "client",
   "version": "0.1.0",
   "private": true,
