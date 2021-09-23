@@ -201,12 +201,15 @@ function SignUp() {
                 await fetch(
                   "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/register",
                   {
-                    method: "POST",
+                    method: "POST", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "include", // include, *same-origin, omit
                     headers: {
-                      "Content-Type": "Application/json",
+                      "Content-Type": "application/json",
                       "access-control-allow-origin": "*",
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    credentials: "include",
                     body: JSON.stringify({ ...values }),
                   }
                 )
