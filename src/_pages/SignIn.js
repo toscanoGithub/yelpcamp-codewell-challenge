@@ -197,22 +197,19 @@ function SignIn() {
               }}
               validationSchema={validate}
               onSubmit={async (values, formik) => {
-                await fetch(
-                  "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/login",
-                  {
-                    method: "POST", // *GET, POST, PUT, DELETE, etc.
-                    mode: "cors", // no-cors, *cors, same-origin
-                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: "include", // include, *same-origin, omit
-                    headers: {
-                      Accept: "application/json",
-                      "Content-Type": "application/json",
-                      "access-control-allow-origin": "*",
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: JSON.stringify({ ...values }),
-                  }
-                )
+                await fetch(`${process.env.REACT_APP_API_URL}api/users/login`, {
+                  method: "POST", // *GET, POST, PUT, DELETE, etc.
+                  mode: "cors", // no-cors, *cors, same-origin
+                  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                  credentials: "include", // include, *same-origin, omit
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "access-control-allow-origin": "*",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: JSON.stringify({ ...values }),
+                })
                   .then((response) => response.json())
                   .then((data) => {
                     console.log("data response from login", data);
