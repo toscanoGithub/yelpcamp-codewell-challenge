@@ -1,8 +1,9 @@
-Note:
-add .env file in the client folder with the content below
+Note: shared .env this file cause no sensitive info.
+
+for developement:
 REACT_APP_API_URL=http://localhost:5000/
-this endpoint will be changed in production stage.
-Example:
+
+For production: as an example.
 REACT_APP_API_URL=https://yelpcamp-codewell-challenge.herokuapp.com/
 
 
