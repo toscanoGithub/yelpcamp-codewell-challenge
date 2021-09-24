@@ -41,7 +41,7 @@ function App() {
 
       axios({
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}/user`,
+        url: `${process.env.REACT_APP_API_URL}user`,
         withCredentials: true,
       })
         .then((res) => {
