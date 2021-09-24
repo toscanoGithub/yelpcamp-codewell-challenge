@@ -79,7 +79,7 @@ function Header() {
 
     setAuth(null);
     setCurrentUser(null);
-    history.push("/");
+    // history.push("/");
   };
 
   const logout = async () => {
