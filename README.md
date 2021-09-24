@@ -1,3 +1,15 @@
+Note:
+add .env file in the client folder with the content below
+REACT_APP_API_URL=http://localhost:5000/
+this endpoint will be changed in production stage.
+Example:
+REACT_APP_API_URL=https://yelpcamp-codewell-challenge.herokuapp.com/
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
