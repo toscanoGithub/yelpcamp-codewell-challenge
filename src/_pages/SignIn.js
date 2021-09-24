@@ -221,6 +221,10 @@ function SignIn() {
                     }
                   })
                   .catch((err) => {
+                    setErrors(err.errors);
+                    setTimeout(() => {
+                      setErrors(null);
+                    }, 3000);
                     console.log(err);
                   });
               }}
