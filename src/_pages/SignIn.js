@@ -202,7 +202,11 @@ function SignIn() {
                   method: "post",
                   url: `${process.env.REACT_APP_API_URL}api/users/login`,
                   withCredentials: true,
-                  headers: { "Access-Control-Allow-Origin": "*" },
+                  headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods":
+                      "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+                  },
                   data: {
                     ...values,
                   },
