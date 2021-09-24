@@ -79,10 +79,11 @@ function Header() {
 
     setAuth(null);
     setCurrentUser(null);
-    // history.push("/");
+    history.push("/");
   };
 
   const logout = async () => {
+    removeCookie("jwt");
     await fetch(
       "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
       {
@@ -94,8 +95,6 @@ function Header() {
         credentials: "include",
       }
     );
-
-    removeCookie("jwt");
   };
 
   useEffect(() => {

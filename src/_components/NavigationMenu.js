@@ -53,14 +53,14 @@ const NavigationMenu = () => {
   };
 
   const logout = async () => {
-    axios({
+    removeCookie("jwt");
+    await axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/users/logout`,
       withCredentials: true,
     })
       .then((res) => {
         console.log(res);
-        removeCookie("jwt");
       })
       .catch((err) => {
         console.log(err);
