@@ -198,17 +198,17 @@ function SignIn() {
               }}
               validationSchema={validate}
               onSubmit={async (values, formik) => {
-                axios({
-                  method: "post",
+                await axios({
+                  method: "POST",
                   url: `${process.env.REACT_APP_API_URL}api/users/login`,
                   withCredentials: true,
-                  
+
                   data: {
                     ...values,
                   },
                 })
                   .then((res) => {
-                    console.log(res);
+                    console.log("res.dada >>>>> ", res.data);
                     if (res.data.errors) {
                       setErrors(res.data.errors);
                       setTimeout(() => {
@@ -221,11 +221,7 @@ function SignIn() {
                     }
                   })
                   .catch((err) => {
-                    setErrors(err.errors);
-                    setTimeout(() => {
-                      setErrors(null);
-                    }, 3000);
-                    console.log(err);
+                    console.log("error on login>>>", err.message);
                   });
               }}
             >
