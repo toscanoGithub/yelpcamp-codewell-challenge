@@ -25,6 +25,7 @@ import Spinner from "../_components/Spinner";
 
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { LoginContext } from "../_helpers/Context";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -196,39 +197,30 @@ function SignUp() {
               }}
               validationSchema={validate}
               onSubmit={async (values, formik) => {
-                console.log("+++++++++ Form Data +++++++++", values);
-
-                await fetch(
-                  "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/register",
-                  {
-                    method: "POST", // *GET, POST, PUT, DELETE, etc.
-                    mode: "cors", // no-cors, *cors, same-origin
-                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: "include", // include, *same-origin, omit
-                    headers: {
-                      "Content-Type": "application/json",
-                      "access-control-allow-origin": "*",
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: JSON.stringify({ ...values }),
-                  }
-                )
-                  .then((response) => response.json())
-                  .then((data) => {
-                    if (data.errors) {
-                      setErrors(data.errors);
+                axios({
+                  method: "post",
+                  url: `${process.env.REACT_APP_API_URL}api/users/register`,
+                  withCredentials: true,
+                  data: {
+                    ...values,
+                  },
+                })
+                  .then((res) => {
+                    console.log(res);
+                    if (res.data.errors) {
+                      setErrors(res.data.errors);
                       setTimeout(() => {
                         setErrors(null);
                       }, 3000);
                     } else {
                       formik.resetForm();
-                      setAuth(data.user);
+                      setAuth(res.data.user);
                       history.push("/search");
                     }
                   })
-                  .catch((error) =>
-                    console.log("Failed to register", error.message)
-                  );
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }}
             >
               {(formik) => {
