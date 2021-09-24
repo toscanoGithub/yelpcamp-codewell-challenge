@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { LoginContext } from "../_helpers/Context";
 import Cookies from "js-cookie";
+import axios from "axios"
 
 const useStyles = makeStyles((theme) => ({
   menu: {
@@ -53,16 +54,33 @@ const NavigationMenu = () => {
   };
 
   const logout = async () => {
-    await fetch(
-      "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
-      {
-        method: "POST",
-        headers: { "Content-Type": "Application/json" },
-        credentials: "include",
-      }
-    );
+    // await fetch(
+    //   "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
+    //   {
+    //     method: "POST",
+    //     headers: { "Content-Type": "Application/json" },
+    //     credentials: "include",
+    //   }
+    // );
 
-    removeCookie("jwt");
+    // removeCookie("jwt");
+
+axios({
+  method: "GET",
+  url: `${process.env.REACT_APP_API_URL}api/users/logout`,
+  withCredentials: true,
+})
+  .then((res) => {
+    console.log(res);
+   removeCookie("jwt")
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
+
+
   };
 
   useEffect(() => {
