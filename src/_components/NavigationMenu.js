@@ -60,7 +60,7 @@ const NavigationMenu = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log("logout response", res.data);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -70,17 +70,20 @@ const NavigationMenu = () => {
   useEffect(() => {
     (async function () {
       if (!auth) return;
-      await fetch(`${process.env.REACT_APP_API_URL}${auth}`, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "include", // include, *same-origin, omit
-        headers: {
-          "Content-Type": "application/json",
-          "access-control-allow-origin": "*",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
+      await fetch(
+        `https://yelpcamp-codewell-challenge.herokuapp.com/api/users/${auth}`,
+        {
+          method: "GET", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "include", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            "access-control-allow-origin": "*",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           setCurrentUser(data);
@@ -103,14 +106,14 @@ const NavigationMenu = () => {
 
       <Divider light />
       {currentUser ? (
-        <Link to="#">
+        <Link to="/">
           <Typography onClick={logout} className={classes.menuItem}>
             Logout
           </Typography>
         </Link>
       ) : (
         <Link to="/signin">
-          <Typography className={classes.menuItem}>Sign In</Typography>
+          <Typography className={classes.menuItem}>Sign Up</Typography>
         </Link>
       )}
       <Divider light />
