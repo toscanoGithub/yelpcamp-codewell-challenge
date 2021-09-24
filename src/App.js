@@ -9,6 +9,7 @@ import SignUp from "./_pages/SignUp";
 import { LoginContext } from "./_helpers/Context";
 import { useEffect, useState } from "react";
 import AddNewComment from "./_pages/AddNewComment";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -19,23 +20,41 @@ function App() {
 
   useEffect(() => {
     (async function () {
-      await fetch(`https://yelpcamp-codewell-challenge.herokuapp.com/user`, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "include", // include, *same-origin, omit
-        headers: {
-          "Content-Type": "application/json",
-          "access-control-allow-origin": "*",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
+      // await fetch(`https://yelpcamp-codewell-challenge.herokuapp.com/user`, {
+      //   method: "GET", // *GET, POST, PUT, DELETE, etc.
+      //   mode: "cors", // no-cors, *cors, same-origin
+      //   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      //   credentials: "include", // include, *same-origin, omit
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "access-control-allow-origin": "*",
+      //     // 'Content-Type': 'application/x-www-form-urlencoded',
+      //   },
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     setAuth(data._id);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error.message);
+      //   });
+
+      axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/user`,
+        withCredentials: true,
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setAuth(data._id);
+        .then((res) => {
+          console.log(res);
+          if (res.data.errors) {
+            console.log("APP res.data.errors");
+          } else {
+            console.log("APP res.data", res.data);
+            setAuth(res.data._id);
+          }
         })
-        .catch((error) => {
-          console.log(error.message);
+        .catch((err) => {
+          console.log(err);
         });
     })();
   }, []);
