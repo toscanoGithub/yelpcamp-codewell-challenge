@@ -25,6 +25,7 @@ import Spinner from "../_components/Spinner";
 
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { LoginContext } from "../_helpers/Context";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -197,37 +198,30 @@ function SignIn() {
               }}
               validationSchema={validate}
               onSubmit={async (values, formik) => {
-                await fetch(`${process.env.REACT_APP_API_URL}api/users/login`, {
-                  method: "POST", // *GET, POST, PUT, DELETE, etc.
-                  mode: "cors", // no-cors, *cors, same-origin
-                  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                  credentials: "same-origin", // include, *same-origin, omit
-                  headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    "access-control-allow-origin": "*",
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                axios({
+                  method: "post",
+                  url: `${process.env.REACT_APP_API_URL}api/user/login`,
+                  withCredentials: true,
+                  data: {
+                    ...values,
                   },
-                  body: JSON.stringify({ ...values }),
                 })
-                  .then((response) => response.json())
-                  .then((data) => {
-                    console.log("data response from login", data);
-
-                    if (data.errors) {
-                      setErrors(data.errors);
+                  .then((res) => {
+                    console.log(res);
+                    if (res.data.errors) {
+                      setErrors(res.data.errors);
                       setTimeout(() => {
                         setErrors(null);
                       }, 3000);
                     } else {
                       formik.resetForm();
-                      setAuth(data.user);
+                      setAuth(res.data.user);
                       history.push("/search");
                     }
                   })
-                  .catch((error) =>
-                    console.log("Failed to signin", error.message)
-                  );
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }}
             >
               {(formik) => {
