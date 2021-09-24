@@ -70,7 +70,7 @@ const NavigationMenu = () => {
   useEffect(() => {
     (async function () {
       if (!auth) return;
-      fetch(`${process.env.REACT_APP_API_URL}${auth}`, {
+      await fetch(`${process.env.REACT_APP_API_URL}${auth}`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
