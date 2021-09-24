@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { LoginContext } from "../_helpers/Context";
 import Cookies from "js-cookie";
-import axios from "axios"
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   menu: {
@@ -47,42 +47,25 @@ const NavigationMenu = () => {
 
   const removeCookie = (key) => {
     Cookies.remove(key);
-
     setAuth(null);
     setCurrentUser(null);
     history.push("/");
   };
 
   const logout = async () => {
-    await fetch(
-      "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "Application/json",
-          "access-control-allow-origin": "*",
-        },
-        credentials: "include",
-      }
-    );
-
-    removeCookie("jwt");
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/users/logout`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res);
+        removeCookie("jwt");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  
-
-// axios({
-//   method: "GET",
-//   url: `${process.env.REACT_APP_API_URL}api/users/logout`,
-//   withCredentials: true,
-// })
-//   .then((res) => {
-//     console.log(res);
-//    removeCookie("jwt")
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-  //};
 
   useEffect(() => {
     (async function () {
