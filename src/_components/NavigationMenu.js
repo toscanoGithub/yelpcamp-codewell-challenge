@@ -60,7 +60,7 @@ const NavigationMenu = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res);
+        console.log("logout response", res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -106,14 +106,14 @@ const NavigationMenu = () => {
 
       <Divider light />
       {currentUser ? (
-        <Link to="/">
+        <Link to="#">
           <Typography onClick={logout} className={classes.menuItem}>
             Logout
           </Typography>
         </Link>
       ) : (
-        <Link to="/signup">
-          <Typography className={classes.menuItem}>Sign Up</Typography>
+        <Link to="/signin">
+          <Typography className={classes.menuItem}>Sign In</Typography>
         </Link>
       )}
       <Divider light />

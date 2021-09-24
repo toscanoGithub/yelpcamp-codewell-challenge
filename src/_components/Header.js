@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { LoginContext } from "../_helpers/Context";
 import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import axios from "axios"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,19 +85,18 @@ function Header() {
 
   const logout = async () => {
     removeCookie("jwt");
-    await fetch(
-      "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "Application/json",
-          "access-control-allow-origin": "*",
-        },
-        credentials: "include",
-      }
-    );
+    await axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/users/logout`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log("logout response", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
   useEffect(() => {
     (async function () {
       if (!auth) return;
