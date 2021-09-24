@@ -50,38 +50,39 @@ const NavigationMenu = () => {
 
     setAuth(null);
     setCurrentUser(null);
-    // history.push("/");
+    history.push("/");
   };
 
   const logout = async () => {
-    // await fetch(
-    //   "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
-    //   {
-    //     method: "POST",
-    //     headers: { "Content-Type": "Application/json" },
-    //     credentials: "include",
-    //   }
-    // );
+    await fetch(
+      "https://yelpcamp-codewell-challenge.herokuapp.com/api/users/logout",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+          "access-control-allow-origin": "*",
+        },
+        credentials: "include",
+      }
+    );
 
-    // removeCookie("jwt");
-
-axios({
-  method: "GET",
-  url: `${process.env.REACT_APP_API_URL}api/users/logout`,
-  withCredentials: true,
-})
-  .then((res) => {
-    console.log(res);
-   removeCookie("jwt")
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-
-
-
+    removeCookie("jwt");
   };
+  
+
+// axios({
+//   method: "GET",
+//   url: `${process.env.REACT_APP_API_URL}api/users/logout`,
+//   withCredentials: true,
+// })
+//   .then((res) => {
+//     console.log(res);
+//    removeCookie("jwt")
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+  //};
 
   useEffect(() => {
     (async function () {
