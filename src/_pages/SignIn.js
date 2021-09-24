@@ -200,7 +200,7 @@ function SignIn() {
               onSubmit={async (values, formik) => {
                 axios({
                   method: "post",
-                  url: `${process.env.REACT_APP_API_URL}api/user/login`,
+                  url: `${process.env.REACT_APP_API_URL}api/users/login`,
                   withCredentials: true,
                   data: {
                     ...values,
