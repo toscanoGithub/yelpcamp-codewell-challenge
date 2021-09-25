@@ -55,7 +55,7 @@ const NavigationMenu = () => {
 
   const logout = async () => {
     await axios({
-      method: "GET",
+      method: "POST",
       url: `${process.env.REACT_APP_API_URL}api/users/logout`,
       withCredentials: true,
     })
