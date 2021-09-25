@@ -23,7 +23,6 @@ function App() {
       await axios({
         method: "GET",
         url: `${process.env.REACT_APP_API_URL}user`,
-        withCredentials: true,
       })
         .then((res) => {
           console.log(res);
