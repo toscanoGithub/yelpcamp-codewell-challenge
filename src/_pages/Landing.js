@@ -117,27 +117,27 @@ function Landing() {
   const history = useHistory();
   const { auth, setAuth } = useContext(LoginContext);
 
-  // useEffect(() => {
-  //   (async function () {
-  //     await axios({
-  //       method: "GET",
-  //       url: `${process.env.REACT_APP_API_URL}user`,
-  //       withCredentials: true,
-  //     })
-  //       .then((res) => {
-  //         console.log(res);
-  //         if (res.data.errors) {
-  //           console.log("Landing res.data.errors");
-  //         } else {
-  //           console.log("Landing res.data", res.data);
-  //           setAuth(res.data._id);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.message);
-  //       });
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async function () {
+      await axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_API_URL}user`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data.errors) {
+            console.log("Landing res.data.errors");
+          } else {
+            console.log("Landing res.data", res.data);
+            setAuth(res.data._id);
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    })();
+  }, []);
 
   return (
     <Grid

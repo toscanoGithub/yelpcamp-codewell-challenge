@@ -18,26 +18,26 @@ function App() {
   const classes = useStyles();
   const [auth, setAuth] = useState();
 
-  useEffect(() => {
-    (async function () {
-      await axios({
-        method: "GET",
-        url: `${process.env.REACT_APP_API_URL}user`,
-      })
-        .then((res) => {
-          console.log(res);
-          if (res.data.errors) {
-            console.log("APP res.data.errors");
-          } else {
-            console.log("APP res.data", res.data);
-            setAuth(res.data._id);
-          }
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async function () {
+  //     await axios({
+  //       method: "GET",
+  //       url: `${process.env.REACT_APP_API_URL}user`,
+  //     })
+  //       .then((res) => {
+  //         console.log(res);
+  //         if (res.data.errors) {
+  //           console.log("APP res.data.errors");
+  //         } else {
+  //           console.log("APP res.data", res.data);
+  //           setAuth(res.data._id);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err.message);
+  //       });
+  //   })();
+  // }, []);
   return (
     <LoginContext.Provider value={{ auth, setAuth }} className={classes.root}>
       <Switch>
