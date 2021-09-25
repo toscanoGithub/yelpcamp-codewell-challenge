@@ -221,7 +221,7 @@ function SignIn() {
                     }
                   })
                   .catch((err) => {
-                    console.log("error on login>>>", err.message);
+                    console.log("error on login>>>", err);
                   });
               }}
             >
