@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "all 0.25s ease",
     "&:hover": {
       backgroundColor: "#EC645B",
-      color: "black",
+      color: "white",
     },
     "&>a": {
       width: "100%",
