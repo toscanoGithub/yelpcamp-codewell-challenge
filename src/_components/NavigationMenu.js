@@ -104,14 +104,14 @@ const NavigationMenu = () => {
 
       <Divider light />
       {currentUser ? (
-        <Link to="/">
+        <Link to="#">
           <Typography onClick={logout} className={classes.menuItem}>
             Logout
           </Typography>
         </Link>
       ) : (
         <Link to="/signin">
-          <Typography className={classes.menuItem}>Sign Up</Typography>
+          <Typography className={classes.menuItem}>Sign In</Typography>
         </Link>
       )}
       <Divider light />

@@ -166,7 +166,7 @@ function SignIn() {
   const validate = Yup.object({
     username: Yup.string()
       .max(9, "Must be 9 characters or less")
-      .required("Required"),
+      .required("Username is required"),
     password: Yup.string()
       .min(6, "Must be at least 6 characters")
       .required("Password is required"),
