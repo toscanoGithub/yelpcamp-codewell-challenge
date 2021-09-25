@@ -95,7 +95,7 @@ const NavigationMenu = () => {
     <Menu className={classes.menu} right width={250}>
       {currentUser && (
         <Typography variant="subtitle1" className={classes.username}>
-          Welcome {currentUser.username}
+          Welcome, {currentUser.username}
         </Typography>
       )}
       <Link to="/">

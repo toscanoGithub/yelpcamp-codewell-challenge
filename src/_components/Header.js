@@ -132,7 +132,7 @@ function Header() {
           {currentUser ? (
             <div className={classes.info}>
               <Typography variant="subtitle1">
-                {currentUser?.username}
+                Welcome, {currentUser?.username}
               </Typography>
               <Button onClick={logout} className={classes.logout}>
                 Logout
