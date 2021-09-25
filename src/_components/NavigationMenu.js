@@ -61,6 +61,7 @@ const NavigationMenu = () => {
     })
       .then((res) => {
         console.log("logout response", res.data);
+        removeCookie("jwt")
       })
       .catch((err) => {
         console.log(err);

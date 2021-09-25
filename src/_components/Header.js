@@ -84,7 +84,6 @@ function Header() {
   };
 
   const logout = async () => {
-    removeCookie("jwt");
     await axios({
       method: "POST",
       url: `${process.env.REACT_APP_API_URL}api/users/logout`,
@@ -92,6 +91,7 @@ function Header() {
     })
       .then((res) => {
         console.log("logout response", res.data);
+        removeCookie("jwt");
       })
       .catch((err) => {
         console.log(err);
