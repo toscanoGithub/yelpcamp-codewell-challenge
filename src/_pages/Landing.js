@@ -119,42 +119,42 @@ function Landing() {
 
   useEffect(() => {
     (async function () {
-      // await fetch(`https://yelpcamp-codewell-challenge.herokuapp.com/user`, {
-      //   method: "GET", // *GET, POST, PUT, DELETE, etc.
-      //   mode: "cors", // no-cors, *cors, same-origin
-      //   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      //   credentials: "include", // include, *same-origin, omit
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "access-control-allow-origin": "*",
-      //     // 'Content-Type': 'application/x-www-form-urlencoded',
-      //   },
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     setAuth(data._id);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error.message);
-      //   });
-
-      await axios({
-        method: "GET",
-        url: `${process.env.REACT_APP_API_URL}user`,
-        withCredentials: true,
+      await fetch(`https://yelpcamp-codewell-challenge.herokuapp.com/user`, {
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "include", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          "access-control-allow-origin": "*",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
       })
-        .then((res) => {
-          console.log(res);
-          if (res.data.errors) {
-            console.log("APP res.data.errors");
-          } else {
-            console.log("APP res.data", res.data);
-            setAuth(res.data._id);
-          }
+        .then((response) => response.json())
+        .then((data) => {
+          setAuth(data._id);
         })
-        .catch((err) => {
-          console.log(err.message);
+        .catch((error) => {
+          console.log(error.message);
         });
+
+      // await axios({
+      //   method: "GET",
+      //   url: `${process.env.REACT_APP_API_URL}user`,
+      //   withCredentials: true,
+      // })
+      //   .then((res) => {
+      //     console.log(res);
+      //     if (res.data.errors) {
+      //       console.log("APP res.data.errors");
+      //     } else {
+      //       console.log("APP res.data", res.data);
+      //       setAuth(res.data._id);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
     })();
   }, []);
 
