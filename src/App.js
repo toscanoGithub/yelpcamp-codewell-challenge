@@ -39,8 +39,8 @@ function App() {
       //     console.log(error.message);
       //   });
 
-      axios({
-        method: "get",
+      await axios({
+        method: "POST",
         url: `${process.env.REACT_APP_API_URL}user`,
         withCredentials: true,
       })
