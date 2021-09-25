@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 import { Link, useHistory } from "react-router-dom";
 import { LoginContext } from "../_helpers/Context";
 import { useContext, useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -76,8 +76,8 @@ function Header() {
   const [currentUser, setCurrentUser] = useState(null);
 
   const removeCookie = (key) => {
-    Cookies.remove(key);
-
+    const cookies = new Cookies();
+    cookies.remove(key);
     setAuth(null);
     setCurrentUser(null);
     history.push("/");

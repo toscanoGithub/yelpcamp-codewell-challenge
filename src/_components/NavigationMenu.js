@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 
 import { LoginContext } from "../_helpers/Context";
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,24 +46,21 @@ const NavigationMenu = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const removeCookie = (key) => {
-    Cookies.remove(key);
+    const cookies = new Cookies();
+    cookies.remove(key);
     setAuth(null);
     setCurrentUser(null);
     history.push("/");
   };
 
   const logout = async () => {
-    Cookies.remove("jwt");
-    setAuth(null);
-    setCurrentUser(null);
-    history.push("/");
     await axios({
       method: "GET",
       url: `${process.env.REACT_APP_API_URL}api/users/logout`,
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res);
+        console.log("logout response", res.data);
       })
       .catch((err) => {
         console.log(err);
