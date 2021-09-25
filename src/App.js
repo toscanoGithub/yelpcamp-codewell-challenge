@@ -40,7 +40,7 @@ function App() {
       //   });
 
       await axios({
-        method: "POST",
+        method: "GET",
         url: `${process.env.REACT_APP_API_URL}user`,
         withCredentials: true,
       })
