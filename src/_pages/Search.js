@@ -103,6 +103,7 @@ function Search() {
   const history = useHistory();
 
   const [campcards, setCampcards] = useState([]);
+  const [termSearch, setTermSearch] = useState(null);
 
   useLayoutEffect(() => {
     setCampcards([...campcards, ...featuredCamps]);
@@ -129,7 +130,16 @@ function Search() {
           </div>
           <Button disabled={!auth}>Search</Button>
         </div>
-        <Typography variant="subtitle1" component={Link} to="/add/campground">
+        <Typography
+          onClick={() =>
+            `${
+              auth ? history.push("/add/campground") : history.push("/signin")
+            }`
+          }
+          variant="subtitle1"
+          component={Link}
+          to="#"
+        >
           Or add your own campgrounds.
         </Typography>
       </div>

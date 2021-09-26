@@ -176,9 +176,7 @@ function Landing() {
           </div>
         </div>
         <Button
-          onClick={() =>
-            auth ? history.push("/search") : history.push("/signin")
-          }
+          onClick={() => history.push("/search")}
           disableElevation
           variant="contained"
         >
