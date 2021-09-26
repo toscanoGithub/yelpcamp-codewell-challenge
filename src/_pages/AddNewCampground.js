@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1.6rem",
       fontWeight: 700,
       textAlign: "center",
-      paddingTop: 50,
+      paddingTop: 30,
       "&::after": {
         content: "''",
         paddingBottom: 10,
