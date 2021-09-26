@@ -128,7 +128,7 @@ function Search() {
             <SearchIcon />
             <input type="text" placeholder="Search for camps" />
           </div>
-          <Button disabled={!auth}>Search</Button>
+          <Button>Search</Button>
         </div>
         <Typography
           onClick={() =>
