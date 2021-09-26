@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   form: {
-    margin: "30px auto",
+    margin: "10px auto",
     width: 600,
     [theme.breakpoints.down("xs")]: {
       maxWidth: "90%",
