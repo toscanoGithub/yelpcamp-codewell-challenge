@@ -138,7 +138,7 @@ function Search() {
           }
           variant="subtitle1"
           component={Link}
-          to="#"
+          to="/add/campground"
         >
           Or add your own campgrounds.
         </Typography>

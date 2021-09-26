@@ -81,6 +81,7 @@ function IndividualCampground() {
     }
   }, []);
 
+  console.log(selectedCampground, parseInt(id));
   return (
     <div className={classes.root}>
       <Header />

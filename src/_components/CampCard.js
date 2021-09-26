@@ -53,14 +53,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function CampCard({id, pic, title, description }) {
+function CampCard({_id, pic, title, description }) {
     const classes = useStyles();
     const history = useHistory();
 
 
     const viewCampgroundDetails = (e) => {
         e.preventDefault()
-        history.push(`/individual/${id}`);
+        history.push(`/individual/${_id}`);
     }
   return (
     <Card className={classes.root}>
