@@ -2,6 +2,8 @@ import { Button, Divider, makeStyles, Typography } from "@material-ui/core";
 import { featuredReviews } from "../data/featured.reviews";
 import chatIcon from "../assets/chat-bubble.svg";
 import { useHistory } from "react-router";
+import { useContext } from "react";
+import { LoginContext } from "../_helpers/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +49,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Reviews() {
   const classes = useStyles();
-  const history = useHistory()
+  const history = useHistory();
+  const { auth, setAuth } = useContext(LoginContext);
+
   return (
     <div className={classes.root}>
       {featuredReviews &&
@@ -61,7 +65,13 @@ function Reviews() {
             <Divider style={{ marginTop: 10 }} light />
           </div>
         ))}
-      <Button onClick={() => history.push("/add/comment")} disableElevation variant="contained">
+      <Button
+        onClick={() =>
+          `${auth ? history.push("/add/comment") : history.push("/signin")}`
+        }
+        disableElevation
+        variant="contained"
+      >
         <img src={chatIcon} alt="chat" /> Leave a review
       </Button>
     </div>
