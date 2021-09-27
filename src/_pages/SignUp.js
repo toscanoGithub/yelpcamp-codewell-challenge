@@ -206,7 +206,7 @@ function SignUp() {
                   },
                 })
                   .then((res) => {
-                    console.log("res.dada register >>>>> ", res.data);
+                    // console.log("res.dada register >>>>> ", res.data);
                     if (res.data.errors) {
                       setErrors(res.data.errors);
                       setTimeout(() => {

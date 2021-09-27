@@ -90,37 +90,14 @@ function Header() {
       withCredentials: true,
     })
       .then((res) => {
-        console.log("logout response", res.data);
+        // console.log("logout response", res.data);
         removeCookie("jwt");
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  // useEffect(() => {
-  //   (async function () {
-  //     console.log("auth in Header", auth);
-  //     if (!auth) return;
-  //     await fetch(`${process.env.REACT_APP_API_URL}api/users/${auth}`, {
-  //       method: "GET", // *GET, POST, PUT, DELETE, etc.
-  //       mode: "cors", // no-cors, *cors, same-origin
-  //       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-  //       credentials: "include", // include, *same-origin, omit
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "access-control-allow-origin": "*",
-  //         // 'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setCurrentUser(data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //       });
-  //   })();
-  // }, [auth]);
+  
 
   return (
     <div className={classes.root}>

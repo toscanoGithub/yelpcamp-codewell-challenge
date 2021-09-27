@@ -106,11 +106,11 @@ function AddNewCampground() {
             validationSchema={validate}
             onSubmit={async (values, formik) => {
               // setShowSpinner(true);
-              console.log("+++++++++ Form Data +++++++++", {
-                ...values,
-                image,
-                auth,
-              });
+              // console.log("+++++++++ Form Data +++++++++", {
+              //   ...values,
+              //   image,
+              //   auth,
+              // });
               await axios({
                 method: "POST",
                 url: `${process.env.REACT_APP_API_URL}api/campgrounds`,
@@ -122,7 +122,7 @@ function AddNewCampground() {
                 },
               })
                 .then((res) => {
-                  console.log("res.data", res.data);
+                  // console.log("res.data", res.data);
                   setCampgrounds([res.data, ...campgrounds]);
                   history.push("/search");
                 })

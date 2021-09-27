@@ -102,21 +102,7 @@ function Search() {
   const { auth, setAuth } = useContext(LoginContext);
   const history = useHistory();
 
-  const [campcards, setCampcards] = useState([]);
-  const [termSearch, setTermSearch] = useState(null);
-
-  const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
-
-  useEffect(() => {
-    setCampcards([...campcards, ...featuredCamps]);
-    console.log("====================================");
-    console.log(campgrounds);
-    console.log("====================================");
-  }, [campgrounds]);
-
-  const searchForCamps = (e) => {
-    e.preventDefault();
-  };
+  const { campgrounds } = useContext(CampgroundsContext);
 
   return (
     <div className={classes.root}>

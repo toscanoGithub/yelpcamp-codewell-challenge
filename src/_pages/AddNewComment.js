@@ -87,7 +87,7 @@ function AddNewComment() {
             validationSchema={validate}
             onSubmit={async (values, formik) => {
               // setShowSpinner(true);
-              console.log("+++++++++ Form Data +++++++++", values);
+              // console.log("+++++++++ Form Data +++++++++", values);
 
               formik.resetForm();
             }}

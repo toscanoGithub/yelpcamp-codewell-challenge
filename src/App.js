@@ -27,7 +27,6 @@ function App() {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data.campgrounds);
           setCampgrounds(res.data.campgrounds);
         })
         .catch((err) => {
@@ -48,11 +47,10 @@ function App() {
         },
       })
         .then((res) => {
-          console.log(res);
           if (res.data.errors) {
-            console.log("Landing res.data.errors");
+            // console.log("Landing res.data.errors");
           } else {
-            console.log("Landing res.data", res.data);
+            // console.log("App res.data", res.data);
             setAuth(res.data);
           }
         })
