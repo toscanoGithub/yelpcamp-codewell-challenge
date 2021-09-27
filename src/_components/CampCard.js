@@ -101,7 +101,7 @@ function CampCard({ _id, pic, title, description, creator }) {
         </Button>
       </CardActions>
       <Typography className={classes.creator} variant="subtitle1">
-        By @{creator}
+        @{creator}
       </Typography>
     </Card>
   );
