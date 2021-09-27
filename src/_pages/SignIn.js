@@ -208,7 +208,7 @@ function SignIn() {
                   },
                 })
                   .then((res) => {
-                    console.log("res.dada >>>>> ", res.data);
+                    console.log("res.dada login >>>>> ", res.data);
                     if (res.data.errors) {
                       setErrors(res.data.errors);
                       setTimeout(() => {

@@ -123,6 +123,9 @@ function Landing() {
         method: "GET",
         url: `${process.env.REACT_APP_API_URL}user`,
         withCredentials: true,
+        headers: {
+          "access-control-allow-origin": "*",
+        },
       })
         .then((res) => {
           console.log(res);

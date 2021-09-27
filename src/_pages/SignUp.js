@@ -206,7 +206,7 @@ function SignUp() {
                   },
                 })
                   .then((res) => {
-                    console.log(res);
+                    console.log("res.dada register >>>>> ", res.data);
                     if (res.data.errors) {
                       setErrors(res.data.errors);
                       setTimeout(() => {
@@ -219,7 +219,7 @@ function SignUp() {
                     }
                   })
                   .catch((err) => {
-                    console.log(err);
+                    console.log("error on register>>>", err);
                   });
               }}
             >
