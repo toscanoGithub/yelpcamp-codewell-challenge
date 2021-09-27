@@ -77,7 +77,7 @@ function IndividualCampground() {
 
   useEffect(() => {
     setSelectedCampground(campgrounds.filter((sel) => sel._id === id)[0]);
-  }, []);
+  }, [id]);
 
   return (
     <div className={classes.root}>
