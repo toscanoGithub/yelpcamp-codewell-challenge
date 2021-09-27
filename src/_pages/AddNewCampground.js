@@ -91,7 +91,9 @@ function AddNewCampground() {
   });
 
   const getCreatorNameForId = (id) => {
-    return campgrounds.filter((c) => c._id === id)[0].username;
+    return campgrounds.filter((c) => {
+      return c._id === id;
+    });
   };
   return (
     <div className={classes.root}>
@@ -120,7 +122,7 @@ function AddNewCampground() {
                 withCredentials: true,
                 data: {
                   ...values,
-                  creator: getCreatorNameForId(auth),
+                  creator: getCreatorNameForId(auth)[0].username,
                   pic: image,
                 },
               })
