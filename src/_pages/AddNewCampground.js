@@ -114,7 +114,7 @@ function AddNewCampground() {
                 method: "POST",
                 url: `${process.env.REACT_APP_API_URL}api/campgrounds`,
                 withCredentials: true,
-                data: { ...values, creator: auth.username, pic: image },
+                data: { ...values, creator: auth, pic: image },
               })
                 .then((res) => {
                   console.log("res.data", res.data);
