@@ -23,7 +23,7 @@ function App() {
     (async function () {
       await axios({
         method: "GET",
-        url: "http://localhost:5000/api/campgrounds",
+        url: `${process.env.REACT_APP_API_URL}api/campgrounds`,
         withCredentials: true,
       })
         .then((res) => {
