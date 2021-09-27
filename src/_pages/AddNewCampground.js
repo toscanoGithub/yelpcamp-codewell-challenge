@@ -89,6 +89,10 @@ function AddNewCampground() {
     // image: Yup.string().required("Campground image is required"),
     description: Yup.string().required("Campground description is required"),
   });
+
+  const getCreatorNameForId = (id) => {
+    return campgrounds.filter((c) => c._id === id)[0].username;
+  };
   return (
     <div className={classes.root}>
       <Header />
@@ -114,7 +118,11 @@ function AddNewCampground() {
                 method: "POST",
                 url: `${process.env.REACT_APP_API_URL}api/campgrounds`,
                 withCredentials: true,
-                data: { ...values, creator: auth, pic: image },
+                data: {
+                  ...values,
+                  creator: getCreatorNameForId(auth),
+                  pic: image,
+                },
               })
                 .then((res) => {
                   console.log("res.data", res.data);
