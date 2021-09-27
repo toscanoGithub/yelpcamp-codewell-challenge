@@ -12,7 +12,7 @@ import {
 import testimonial from "../assets/user-testimonial.svg";
 import logo from "../assets/logo.svg";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -25,6 +25,10 @@ import Spinner from "../_components/Spinner";
 
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import Header from "../_components/Header";
+
+import FileBase from "react-file-base64";
+import axios from "axios";
+import { CampgroundsContext, LoginContext } from "../_helpers/Context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+
+  baseWrapper: {
+    margin: "20px 0 10px 0",
+  },
 }));
 function AddNewCampground() {
   const classes = useStyles();
@@ -71,10 +79,14 @@ function AddNewCampground() {
   const [state, setState] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [errors, setErrors] = useState(null);
+  const [image, setImage] = useState();
+  const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
+  const { auth, setAuth } = useContext(LoginContext);
+
   const validate = Yup.object({
-    campName: Yup.string().required("Campground name is required"),
+    title: Yup.string().required("Campground name is required"),
     price: Yup.string().required("Campground price is required"),
-    image: Yup.string().required("Campground image is required"),
+    // image: Yup.string().required("Campground image is required"),
     description: Yup.string().required("Campground description is required"),
   });
   return (
@@ -85,16 +97,34 @@ function AddNewCampground() {
         <Grid item xs={12} sm={6} md={6}>
           <Formik
             initialValues={{
-              campName: "",
+              title: "",
               price: "",
-              image: "",
+              // image: "",
               description: "",
             }}
             validationSchema={validate}
             onSubmit={async (values, formik) => {
               // setShowSpinner(true);
-              console.log("+++++++++ Form Data +++++++++", values);
-
+              console.log("+++++++++ Form Data +++++++++", {
+                ...values,
+                image,
+                auth,
+              });
+              await axios({
+                method: "POST",
+                url: "http://localhost:5000/api/campgrounds",
+                withCredentials: true,
+                data: { ...values, creator: auth.username, pic: image },
+              })
+                .then((res) => {
+                  console.log("res.data", res.data);
+                  setCampgrounds([res.data, ...campgrounds]);
+                  history.push("/search");
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                  return [];
+                });
               formik.resetForm();
             }}
           >
@@ -114,7 +144,7 @@ function AddNewCampground() {
                         <TextInput
                           placeholder="Seven Sisters Waterfall"
                           label="Campground Name"
-                          name="campName"
+                          name="title"
                           type="text"
                           emoji=""
                         />
@@ -128,13 +158,24 @@ function AddNewCampground() {
                         emoji=""
                       />
 
-                      <TextInput
+                      {/* <TextInput
                         placeholder="https://www.planetware.com/wpimages/2020/08/canada-ontario-best-campgrounds-algonquin-provincial-park-fog.jpg"
                         label="Image"
                         name="image"
                         type="text"
                         emoji=""
-                      />
+                      /> */}
+
+                      <div className={classes.baseWrapper}>
+                        <FileBase
+                          type="file"
+                          multiple={false}
+                          onDone={({ base64 }) =>
+                            // setMemoryData({ ...memoryData, selectedFile: base64 })
+                            setImage(base64)
+                          }
+                        />
+                      </div>
 
                       <TextInput
                         mode="textarea"

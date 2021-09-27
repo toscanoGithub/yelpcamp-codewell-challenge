@@ -13,7 +13,10 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { featuredCamps } from "../data/featured.camps";
-import { SelectedCampgroundContext } from "../_helpers/Context";
+import {
+  CampgroundsContext,
+  SelectedCampgroundContext,
+} from "../_helpers/Context";
 import map from "../assets/map.png";
 import testimonial from "../assets/user-testimonial.svg";
 import Reviews from "../_components/Reviews";
@@ -70,18 +73,12 @@ function IndividualCampground() {
   const { id } = useParams();
   const [selectedCampground, setSelectedCampground] = useState();
   const matches = useMediaQuery("(min-width:992px)");
+  const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
 
   useEffect(() => {
-    if (parseInt(id) <= 6) {
-      setSelectedCampground(
-        featuredCamps.filter((f) => {
-          return f.id === parseInt(id);
-        })[0]
-      );
-    }
+    setSelectedCampground(campgrounds.filter((sel) => sel._id === id)[0]);
   }, []);
 
-  console.log(selectedCampground, parseInt(id));
   return (
     <div className={classes.root}>
       <Header />
@@ -111,7 +108,7 @@ function IndividualCampground() {
                     {selectedCampground?.title}
                   </Typography>
                   <Typography gutterBottom variant="subtitle1">
-                    {selectedCampground?.price}
+                    ${selectedCampground?.price}
                   </Typography>
                 </div>
                 <Typography variant="subtitle1" color="textSecondary">
@@ -119,7 +116,7 @@ function IndividualCampground() {
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions className={classes.cardActions}></CardActions>
+            {/* <CardActions className={classes.cardActions}></CardActions> */}
           </Card>
           <Paper>
             <Reviews />

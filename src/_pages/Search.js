@@ -2,13 +2,13 @@ import { Button, Grid, makeStyles, Typography } from "@material-ui/core";
 import NavigationMenu from "../_components/NavigationMenu";
 import logo from "../assets/logo.svg";
 import { Link, useHistory } from "react-router-dom";
-import { LoginContext } from "../_helpers/Context";
-import { useContext, useLayoutEffect, useState } from "react";
+import { CampgroundsContext, LoginContext } from "../_helpers/Context";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import CampCard from "../_components/CampCard";
 import { featuredCamps } from "../data/featured.camps";
 import Header from "../_components/Header";
-import TextInput from "../_components/TextInput";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -105,13 +105,19 @@ function Search() {
   const [campcards, setCampcards] = useState([]);
   const [termSearch, setTermSearch] = useState(null);
 
-  useLayoutEffect(() => {
+  const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
+
+  useEffect(() => {
     setCampcards([...campcards, ...featuredCamps]);
-  }, []);
+    console.log("====================================");
+    console.log(campgrounds);
+    console.log("====================================");
+  }, [campgrounds]);
 
   const searchForCamps = (e) => {
     e.preventDefault();
   };
+
   return (
     <div className={classes.root}>
       <Header />
@@ -145,9 +151,10 @@ function Search() {
       </div>
 
       <Grid container spacing={3} className={classes.cards}>
-        {campcards &&
-          campcards.map((campCard) => (
-            <Grid key={campCard.id} item xs={12} sm={6} md={4}>
+        {campgrounds &&
+          campgrounds.length !== 0 &&
+          campgrounds.map((campCard) => (
+            <Grid key={campCard._id} item xs={12} sm={6} md={4}>
               <CampCard {...campCard} />
             </Grid>
           ))}

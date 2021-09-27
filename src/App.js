@@ -6,8 +6,8 @@ import Landing from "./_pages/Landing";
 import Search from "./_pages/Search";
 import SignIn from "./_pages/SignIn";
 import SignUp from "./_pages/SignUp";
-import { LoginContext } from "./_helpers/Context";
-import { useEffect, useState } from "react";
+import { CampgroundsContext, LoginContext } from "./_helpers/Context";
+import { useEffect, useLayoutEffect, useState } from "react";
 import AddNewComment from "./_pages/AddNewComment";
 import axios from "axios";
 
@@ -17,40 +17,40 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [auth, setAuth] = useState();
+  const [campgrounds, setCampgrounds] = useState([]);
 
-  // useEffect(() => {
-  //   (async function () {
-  //     await axios({
-  //       method: "GET",
-  //       url: `${process.env.REACT_APP_API_URL}user`,
-  //     })
-  //       .then((res) => {
-  //         console.log(res);
-  //         if (res.data.errors) {
-  //           console.log("APP res.data.errors");
-  //         } else {
-  //           console.log("APP res.data", res.data);
-  //           setAuth(res.data._id);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.message);
-  //       });
-  //   })();
-  // }, []);
+  useLayoutEffect(() => {
+    (async function () {
+      await axios({
+        method: "GET",
+        url: "http://localhost:5000/api/campgrounds",
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data.campgrounds);
+          setCampgrounds(res.data.campgrounds);
+        })
+        .catch((err) => {
+          console.log(err.message);
+          return [];
+        });
+    })();
+  }, []);
   return (
-    <LoginContext.Provider value={{ auth, setAuth }} className={classes.root}>
-      <Switch>
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/search" component={Search} />
-        <Route path="/individual/:id" component={IndividualCampground} />
-        <Route path="/add/campground" component={AddNewCampground} />
-        <Route path="/add/comment" component={AddNewComment} />
+    <CampgroundsContext.Provider value={{ campgrounds, setCampgrounds }}>
+      <LoginContext.Provider value={{ auth, setAuth }} className={classes.root}>
+        <Switch>
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/search" component={Search} />
+          <Route path="/individual/:id" component={IndividualCampground} />
+          <Route path="/add/campground" component={AddNewCampground} />
+          <Route path="/add/comment" component={AddNewComment} />
 
-        <Route exact path="/" component={Landing} />
-      </Switch>
-    </LoginContext.Provider>
+          <Route exact path="/" component={Landing} />
+        </Switch>
+      </LoginContext.Provider>
+    </CampgroundsContext.Provider>
   );
 }
 

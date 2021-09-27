@@ -130,7 +130,7 @@ function Landing() {
             console.log("Landing res.data.errors");
           } else {
             console.log("Landing res.data", res.data);
-            setAuth(res.data._id);
+            setAuth(res.data);
           }
         })
         .catch((err) => {

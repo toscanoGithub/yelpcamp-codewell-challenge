@@ -13,10 +13,11 @@ import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: 10,
+    padding: "15px 15px 0 15px",
     maxWidth: 400,
     minHeight: 350,
   },
+
   media: {
     height: 200,
     paddingTop: "56.25%",
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
   cardContent: {
     padding: 0,
+    minHeight: 100,
 
     "&>h5": {
       fontSize: "1rem",
@@ -52,16 +54,23 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+
+  creator: {
+    margin: "3px 0 0 0",
+    color: "#ccc",
+    fontSize: "0.7rem",
+    fontWeight: 700,
+    textAlign: "right",
+  },
 }));
-function CampCard({id, pic, title, description }) {
-    const classes = useStyles();
-    const history = useHistory();
+function CampCard({ _id, pic, title, description, creator }) {
+  const classes = useStyles();
+  const history = useHistory();
 
-
-    const viewCampgroundDetails = (e) => {
-        e.preventDefault()
-        history.push(`/individual/${id}`);
-    }
+  const viewCampgroundDetails = (e) => {
+    e.preventDefault();
+    history.push(`/individual/${_id}`);
+  };
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -81,10 +90,19 @@ function CampCard({id, pic, title, description }) {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.cardActions}>
-        <Button onClick={viewCampgroundDetails} variant="outlined" fullWidth size="large" color="secondary">
+        <Button
+          onClick={viewCampgroundDetails}
+          variant="outlined"
+          fullWidth
+          size="large"
+          color="secondary"
+        >
           View Campground
         </Button>
       </CardActions>
+      <Typography className={classes.creator} variant="subtitle1">
+        By @{creator}
+      </Typography>
     </Card>
   );
 }
