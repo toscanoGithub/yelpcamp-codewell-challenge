@@ -216,7 +216,7 @@ function SignIn() {
                       }, 3000);
                     } else {
                       formik.resetForm();
-                      setAuth(res.data.user);
+                      setAuth(res.data);
                       history.push("/search");
                     }
                   })
