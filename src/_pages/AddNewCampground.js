@@ -90,15 +90,6 @@ function AddNewCampground() {
     description: Yup.string().required("Campground description is required"),
   });
 
-  const getCreatorNameForId = () => {
-    const user = campgrounds.filter((c) => {
-      console.log("-------", c, auth);
-      return c._id === auth;
-    });
-
-    console.log("getCreatorNameForId user >>>", user);
-    return user[0].username;
-  };
   return (
     <div className={classes.root}>
       <Header />
@@ -126,7 +117,7 @@ function AddNewCampground() {
                 withCredentials: true,
                 data: {
                   ...values,
-                  creator: getCreatorNameForId()[0].username,
+                  creator: auth.username,
                   pic: image,
                 },
               })
