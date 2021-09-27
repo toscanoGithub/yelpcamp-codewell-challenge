@@ -94,7 +94,7 @@ const NavigationMenu = () => {
   // }, [auth]);
   return (
     <Menu className={classes.menu} right width={250}>
-      {currentUser && (
+      {auth && (
         <Typography variant="subtitle1" className={classes.username}>
           Welcome, {auth?.username}
         </Typography>
