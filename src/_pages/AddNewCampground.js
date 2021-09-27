@@ -112,7 +112,7 @@ function AddNewCampground() {
               });
               await axios({
                 method: "POST",
-                url: "http://localhost:5000/api/campgrounds",
+                url: `${process.env.REACT_APP_API_URL}api/campgrounds`,
                 withCredentials: true,
                 data: { ...values, creator: auth.username, pic: image },
               })
