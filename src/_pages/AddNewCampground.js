@@ -91,9 +91,10 @@ function AddNewCampground() {
   });
 
   const getCreatorNameForId = (id) => {
-    return campgrounds.filter((c) => {
-      return c._id === id;
-    });
+    const user = campgrounds.filter((c) => c._id === id);
+
+    console.log("getCreatorNameForId user >>>", user);
+    return user[0].username;
   };
   return (
     <div className={classes.root}>
