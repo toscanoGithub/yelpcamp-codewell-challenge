@@ -99,6 +99,7 @@ function Header() {
   };
   useEffect(() => {
     (async function () {
+      console.log("auth in Header", auth);
       if (!auth) return;
       await fetch(`${process.env.REACT_APP_API_URL}api/users/${auth._id}`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
