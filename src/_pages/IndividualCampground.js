@@ -11,7 +11,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { featuredCamps } from "../data/featured.camps";
 import {
   CampgroundsContext,
@@ -21,6 +21,7 @@ import map from "../assets/map.png";
 import testimonial from "../assets/user-testimonial.svg";
 import Reviews from "../_components/Reviews";
 import Header from "../_components/Header";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +75,7 @@ function IndividualCampground() {
   const [selectedCampground, setSelectedCampground] = useState();
   const matches = useMediaQuery("(min-width:992px)");
   const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
-
+  const history = useHistory();
   useEffect(() => {
     setSelectedCampground(campgrounds.filter((sel) => sel._id === id)[0]);
   }, [id]);
@@ -101,6 +102,7 @@ function IndividualCampground() {
                 className={classes.media}
                 image={selectedCampground?.pic}
                 title={selectedCampground?.title}
+                alt="pic"
               />
               <CardContent className={classes.cardContent}>
                 <div className={classes.campInfo}>
@@ -119,7 +121,7 @@ function IndividualCampground() {
             {/* <CardActions className={classes.cardActions}></CardActions> */}
           </Card>
           <Paper>
-            <Reviews />
+            <Reviews campId={id} />
           </Paper>
         </Grid>
       </Grid>

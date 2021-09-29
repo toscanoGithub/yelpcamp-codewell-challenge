@@ -105,7 +105,7 @@ function AddNewCampground() {
             }}
             validationSchema={validate}
             onSubmit={async (values, formik) => {
-              // setShowSpinner(true);
+              setShowSpinner(true);
               // console.log("+++++++++ Form Data +++++++++", {
               //   ...values,
               //   image,
@@ -123,6 +123,7 @@ function AddNewCampground() {
               })
                 .then((res) => {
                   // console.log("res.data", res.data);
+                  setShowSpinner(true);
                   setCampgrounds([res.data, ...campgrounds]);
                   history.push("/search");
                 })
@@ -136,7 +137,7 @@ function AddNewCampground() {
             {(formik) => {
               return (
                 <div className={classes.root}>
-                  {/* <Spinner loading={showSpinner} /> */}
+                  <Spinner loading={showSpinner} />
 
                   {errors && (
                     <Typography variant="subtitle1" className={classes.errors}>

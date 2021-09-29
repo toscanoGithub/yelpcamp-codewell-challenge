@@ -68,7 +68,7 @@ function App() {
           <Route path="/search" component={Search} />
           <Route path="/individual/:id" component={IndividualCampground} />
           <Route path="/add/campground" component={AddNewCampground} />
-          <Route path="/add/comment" component={AddNewComment} />
+          <Route path="/add/comment/:id" component={AddNewComment} />
 
           <Route exact path="/" component={Landing} />
         </Switch>

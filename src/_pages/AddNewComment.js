@@ -12,9 +12,9 @@ import {
 import testimonial from "../assets/user-testimonial.svg";
 import logo from "../assets/logo.svg";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 
 import { Form, Formik } from "formik";
@@ -25,6 +25,8 @@ import Spinner from "../_components/Spinner";
 
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import Header from "../_components/Header";
+import { LoginContext } from "../_helpers/Context";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,6 +73,8 @@ function AddNewComment() {
   const [state, setState] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [errors, setErrors] = useState(null);
+  const { auth, setAuth } = useContext(LoginContext);
+  const { id } = useParams();
   const validate = Yup.object({
     comment: Yup.string().required("Comment is required"),
   });
@@ -87,7 +91,29 @@ function AddNewComment() {
             validationSchema={validate}
             onSubmit={async (values, formik) => {
               // setShowSpinner(true);
-              // console.log("+++++++++ Form Data +++++++++", values);
+              console.log("+++++++++ Form Data +++++++++", values, id, auth);
+              await axios({
+                method: "PATCH",
+                url: `${process.env.REACT_APP_API_URL}api/campgrounds/review-campground/${id}`,
+                withCredentials: true,
+
+                data: {
+                  ...values,
+                  id: auth._id,
+                  username: auth.username,
+                },
+              })
+                .then((res) => {
+                  // console.log("res.dada add review >>>>> ", res.data);
+                  formik.resetForm();
+                  console.log(`/individual/${id}`);
+                  history.push(`/individual/${id}`);
+                  // setAuth(res.data);
+                  // history.push("/search");
+                })
+                .catch((err) => {
+                  console.log("error on review camp>>>", err.message);
+                });
 
               formik.resetForm();
             }}
@@ -111,7 +137,7 @@ function AddNewComment() {
                         name="comment"
                         type="text"
                         emoji=""
-                        multiline
+                        multiline="true"
                       />
 
                       <Button

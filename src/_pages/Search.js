@@ -1,6 +1,4 @@
 import { Button, Grid, makeStyles, Typography } from "@material-ui/core";
-import NavigationMenu from "../_components/NavigationMenu";
-import logo from "../assets/logo.svg";
 import { Link, useHistory } from "react-router-dom";
 import { CampgroundsContext, LoginContext } from "../_helpers/Context";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
@@ -9,6 +7,7 @@ import CampCard from "../_components/CampCard";
 import { featuredCamps } from "../data/featured.camps";
 import Header from "../_components/Header";
 import axios from "axios";
+import Spinner from "../_components//Spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -94,7 +93,14 @@ const useStyles = makeStyles((theme) => ({
 
   cards: {
     width: "90%",
-    margin: "30px auto",
+    margin: "0 auto",
+  },
+
+  spinnerWrapper: {
+    marginTop: 50,
+    width:"100%",
+    display: "grid",
+    placeItems:"center",
   },
 }));
 function Search() {
@@ -135,7 +141,9 @@ function Search() {
           Or add your own campgrounds.
         </Typography>
       </div>
-
+      <div className={classes.spinnerWrapper}>
+        <Spinner className={classes.spinner} loading={!campgrounds || campgrounds.length === 0} />
+      </div>
       <Grid container spacing={3} className={classes.cards}>
         {campgrounds &&
           campgrounds.length !== 0 &&
