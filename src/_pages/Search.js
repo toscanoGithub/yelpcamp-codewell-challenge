@@ -109,15 +109,27 @@ function Search() {
   const history = useHistory();
 
   const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
-  const [filteredCampgrounds, setFilteredCampgrounds] = useState(campgrounds);
+  const [filteredCampgrounds, setFilteredCampgrounds] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const searchCampground = (e) => {
-    console.log("search campground...");
     e.preventDefault();
-    setCampgrounds(
+    setFilteredCampgrounds(
       campgrounds.filter((c) => {
-        return c.title.toLowerCase() === e.target.value.toLowerCase();
+        return c.title?.toLowerCase() === searchTerm.toLowerCase();
       })
+    );
+    
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    console.log(searchTerm);
+    if (searchTerm === "") return;
+    setFilteredCampgrounds((f) =>
+      campgrounds.filter((camp) =>
+        camp.title?.toLowerCase().includes(searchTerm?.toLowerCase())
+      )
     );
   };
   return (
@@ -134,7 +146,11 @@ function Search() {
         <div className={classes.userInput}>
           <div className={classes.boxInput}>
             <SearchIcon />
-            <input type="text" placeholder="Search for camps" />
+            <input
+              onChange={handleSearchChange}
+              type="text"
+              placeholder="Search for camps"
+            />
           </div>
           <Button onClick={searchCampground}>Search</Button>
         </div>
@@ -154,20 +170,36 @@ function Search() {
       <div className={classes.spinnerWrapper}>
         <Spinner
           className={classes.spinner}
-          loading={!campgrounds || filteredCampgrounds.length === 0}
+          loading={!campgrounds || campgrounds?.length === 0}
         />
       </div>
       <Grid container spacing={3} className={classes.cards}>
-        {campgrounds &&
-          filteredCampgrounds.length !== 0 &&
-          filteredCampgrounds.map((campCard) => (
-            <Grid key={campCard._id} item xs={12} sm={6} md={4}>
-              <CampCard {...campCard} />
-            </Grid>
-          ))}
+        {campgrounds
+          .filter((val) => {
+            if (searchTerm === "") {
+              return val;
+            } else if (
+              val.title.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return val;
+            }
+          })
+          .map((campCard) => {
+            return (
+              <Grid key={campCard._id} item xs={12} sm={6} md={4}>
+                <CampCard {...campCard} />
+              </Grid>
+            );
+          })}
       </Grid>
     </div>
   );
 }
 
+{
+}
+
+/* <Grid key={campCard._id} item xs={12} sm={6} md={4}>
+  <CampCard {...campCard} />
+</Grid>; */
 export default Search;
