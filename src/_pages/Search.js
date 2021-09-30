@@ -98,9 +98,9 @@ const useStyles = makeStyles((theme) => ({
 
   spinnerWrapper: {
     marginTop: 50,
-    width:"100%",
+    width: "100%",
     display: "grid",
-    placeItems:"center",
+    placeItems: "center",
   },
 }));
 function Search() {
@@ -109,14 +109,17 @@ function Search() {
   const history = useHistory();
 
   const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
-  const [filteredCampgrounds, setFilteredCampgrounds] = useState()
-  
+  const [filteredCampgrounds, setFilteredCampgrounds] = useState(campgrounds);
+
   const searchCampground = (e) => {
-    e.preventDefault()
-     setCampgrounds(campgrounds.filter((c) => {
-       return c.title.toLowerCase() === e.target.value.toLowerCase();
-     }))
-  }
+    console.log("search campground...");
+    e.preventDefault();
+    setCampgrounds(
+      campgrounds.filter((c) => {
+        return c.title.toLowerCase() === e.target.value.toLowerCase();
+      })
+    );
+  };
   return (
     <div className={classes.root}>
       <Header />
@@ -149,12 +152,15 @@ function Search() {
         </Typography>
       </div>
       <div className={classes.spinnerWrapper}>
-        <Spinner className={classes.spinner} loading={!campgrounds || campgrounds.length === 0} />
+        <Spinner
+          className={classes.spinner}
+          loading={!campgrounds || filteredCampgrounds.length === 0}
+        />
       </div>
       <Grid container spacing={3} className={classes.cards}>
         {campgrounds &&
-          campgrounds.length !== 0 &&
-          campgrounds.map((campCard) => (
+          filteredCampgrounds.length !== 0 &&
+          filteredCampgrounds.map((campCard) => (
             <Grid key={campCard._id} item xs={12} sm={6} md={4}>
               <CampCard {...campCard} />
             </Grid>
