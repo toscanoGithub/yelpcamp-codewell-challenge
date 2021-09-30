@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { LoginContext } from "../_helpers/Context";
 import axios from "axios";
 import Spinner from "./Spinner";
+import Moment from "react-moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,7 +91,9 @@ function Reviews({ campId }) {
           <div key={review.timestamp} className={classes.review}>
             <div className={classes.info}>
               <Typography variant="h1">{review.commenterPseudo}</Typography>
-              <Typography variant="subtitle1">{review.timestamp}</Typography>
+              <Typography variant="subtitle1">
+                {review.timestamp.toDate()}
+              </Typography>
             </div>
             <Typography variant="subtitle1">{review.text}</Typography>
             <Divider style={{ marginTop: 10 }} light />
