@@ -91,7 +91,9 @@ function Reviews({ campId }) {
           <div key={review.timestamp} className={classes.review}>
             <div className={classes.info}>
               <Typography variant="h1">{review.commenterPseudo}</Typography>
-              <Typography variant="subtitle1">{review.timestamp}</Typography>
+              <Typography variant="subtitle1">
+                <Moment fromNow>{review.timestamp}</Moment>
+              </Typography>
             </div>
             <Typography variant="subtitle1">{review.text}</Typography>
             <Divider style={{ marginTop: 10 }} light />
