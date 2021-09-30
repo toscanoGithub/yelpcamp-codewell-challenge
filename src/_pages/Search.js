@@ -108,8 +108,15 @@ function Search() {
   const { auth, setAuth } = useContext(LoginContext);
   const history = useHistory();
 
-  const { campgrounds } = useContext(CampgroundsContext);
-
+  const { campgrounds, setCampgrounds } = useContext(CampgroundsContext);
+  const [filteredCampgrounds, setFilteredCampgrounds] = useState()
+  
+  const searchCampground = (e) => {
+    e.preventDefault()
+     setCampgrounds(campgrounds.filter((c) => {
+       return c.title.toLowerCase() === e.target.value.toLowerCase();
+     }))
+  }
   return (
     <div className={classes.root}>
       <Header />
@@ -126,7 +133,7 @@ function Search() {
             <SearchIcon />
             <input type="text" placeholder="Search for camps" />
           </div>
-          <Button>Search</Button>
+          <Button onClick={searchCampground}>Search</Button>
         </div>
         <Typography
           onClick={() =>
