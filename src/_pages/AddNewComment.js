@@ -90,7 +90,7 @@ function AddNewComment() {
             }}
             validationSchema={validate}
             onSubmit={async (values, formik) => {
-              // setShowSpinner(true);
+              setShowSpinner(true);
               console.log("+++++++++ Form Data +++++++++", values, id, auth);
               await axios({
                 method: "PATCH",
@@ -108,6 +108,7 @@ function AddNewComment() {
                   formik.resetForm();
                   console.log(`/individual/${id}`);
                   history.push(`/individual/${id}`);
+                  setShowSpinner(false);
                   // setAuth(res.data);
                   // history.push("/search");
                 })
@@ -141,6 +142,7 @@ function AddNewComment() {
                       />
 
                       <Button
+                        disabled={showSpinner}
                         fullWidth
                         type="submit"
                         fullWidth
