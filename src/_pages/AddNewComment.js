@@ -122,8 +122,6 @@ function AddNewComment() {
             {(formik) => {
               return (
                 <div className={classes.root}>
-                  <Spinner loading={showSpinner} />
-
                   {errors && (
                     <Typography variant="subtitle1" className={classes.errors}>
                       {errors.error}
@@ -148,7 +146,14 @@ function AddNewComment() {
                         fullWidth
                         variant="contained"
                       >
-                        Post Comment
+                        {showSpinner ? (
+                          <Spinner
+                            style={{ margin: "0 auto" }}
+                            loading={showSpinner}
+                          />
+                        ) : (
+                          "Post Comment"
+                        )}
                       </Button>
                     </div>
                   </Form>
