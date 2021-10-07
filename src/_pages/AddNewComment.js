@@ -122,7 +122,7 @@ function AddNewComment() {
             {(formik) => {
               return (
                 <div className={classes.root}>
-                  {/* <Spinner loading={showSpinner} /> */}
+                  <Spinner loading={showSpinner} />
 
                   {errors && (
                     <Typography variant="subtitle1" className={classes.errors}>
